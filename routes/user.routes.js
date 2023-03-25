@@ -11,7 +11,7 @@ userRouter.get("/", (req, res) => {
 
 userRouter.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
-  bcrypt.hash(password, 5, async function (err, hash) {
+  bcrypt.hash(password, 10, async function (err, hash) {
     if (err) return res.send({ message: "somthing went wrong", status: 0 });
     try {
       let user = new UserModel({ name, email, password: hash });
@@ -32,7 +32,7 @@ userRouter.post("/register", async (req, res) => {
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   let option ={
-    expiresIn:"3m"
+    expiresIn:"120m"
   }
 
   try {
